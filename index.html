@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+  <div class="center">
+    <div>Rock Paper Scissors</div>
+    <p><br><br> <span id="results"></span></p>
+    <div class="choices">
+      <div onclick="rock()">
+        <img src="/images/rock.svg" class="images">
+      </div>
+      <div onclick="paper()">
+        <img src="/images/paper.svg" class="images">
+      </div>
+      <div onclick="scissor()">
+        <img src="/images/scissors.svg" class="images">
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      function submit() {
+        document.getElementById("rock").disabled = true;
+        document.getElementById("paper").disabled = true;
+        document.getElementById("scissors").disabled = true;
+      }
+      function scissor() {
+        socket.emit("match", socket.id, "scissors");
+      }
+      function rock() {
+        socket.emit("match", socket.id, "rock");
+      }
+      function paper() {
+        socket.emit("match", socket.id, "paper");
+      }
+      var socket = io();
+      socket.on("connect", () => {
+        console.log(socket.id); //показва потребителското ID
+      });
+      socket.on("disconnect", () => {
+        console.log(socket.id); // undefined
+      });
+      socket.on("same room check", (arg) => {
+        console.log(arg); // проверка дали потребителите са в една стая
+      });
+      socket.on("tester1", (usr1, usr2) => {
+
+        if (usr1 == socket.id) {
+          document.getElementById("results").innerHTML = "you lost ";
+        }
+        if (usr2 == socket.id) {
+          document.getElementById("results").innerHTML = "you won  ";
+        }
+      });
+      socket.on("draw", (arg3) => {
+        if (arg3 == "draw") {
+          document.getElementById("results").innerHTML = "draw";
+        }
+      });
+
+    </script>
+    <button class="button" name="submit" type="submit" value="submit" onClick="window.location.reload();">new
+      game</button>
+  </div>
+</body>
+
+</html>

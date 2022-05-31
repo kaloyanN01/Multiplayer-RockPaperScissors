@@ -1,0 +1,27 @@
+@font-face {
+  font-family: 'myFont';
+  src: url("/fonts/Playtime.otf");}
+body {
+  background-image: url("/images/background.jpg");
+  color: black;
+  font-size: 40px;
+  font-family: 'myFont', 'Times New Roman', Times, serif;}
+.center {
+  border: transparent;
+  text-align: center;
+  margin: 0% 20% 0% 20%;}
+.images {
+  width: 50%;}
+.choices {
+  display: flex;
+  justify-content: space-around;
+  margin: 10% 20% 10% 20%;}
+.button {
+  background: transparent;
+  border: 2px solid #000000;
+  border-radius: 11px;
+  padding: 15px 30px;
+  color: #000000;
+  display: inline-block;
+  font: normal 25px "myFont", sans-serif;
+  text-align: center;}
