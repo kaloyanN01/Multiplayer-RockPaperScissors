@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+require('dotenv').config()
 const { Socket } = require('engine.io');
 const express = require('express');
 const app = express();
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 //стартира сървъра на порт 3000
-server.listen(dotenv.PORT, function () {
+server.listen(process.env.PORT || 3001 , function () {
   console.log('Server is ready and listening on 3000');
 });
 const users = [];
